@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+
+{% block contenido %}
+
+<form action="/buscar" method="GET">
+<label>
+Título de la película
+<input 
+    type="text"
+    id="titulo"
+    name="titulo" 
+    placeholder="Ingrese aqui el título" required>
+    value="{{dataForm['titulo']}}"
+/>
+</label>
+<label>
+Año de la película
+<input 
+type="number"
+id="año"
+name="año" 
+placeholder="Ingrese aqui el año" required>
+value="{{dataForm['año']}}"
+/>
+</label>
+
+<input
+type="submit"
+value="Buscar"
+/>
