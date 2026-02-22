@@ -25,4 +25,12 @@
     value="{{ button }}"
     >
     </form>
+
+            {% if error %}
+<!--Aquí va la targeta con el mensaje de error, está llamado desde routes.py y el estilo desde la carpeta css-->
+            <p class="mensaje_error">
+                {{ error }}
+            </p>
+            {% endif %}
+        
     {% endblock %}
