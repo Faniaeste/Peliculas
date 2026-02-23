@@ -5,3 +5,19 @@
     border: 2px solid #c52f24; 
     border-radius: 30%;
 }
+
+.boton{
+    width:auto; 
+    padding: 2px 10px;
+    outline:invert;
+}
+
+.poster{
+    border-radius: 30px;
+     width: 30%;
+}
+
+h3{
+    color: rgb(11, 110, 164);
+    font-style: oblique;
+}

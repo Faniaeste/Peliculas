@@ -5,12 +5,12 @@
         <div>
             {% if dataForm.Poster !="N/A" %}
 <!--Aquí va la imagen y la descripción de la misma-->
-        <img src="{{ dataForm.Poster }}" alt="Póster de {{ dataForm.Title }}" style="border-radius: 30px; width: 30%;">
+        <img src="{{ dataForm.Poster }}" alt="Póster de {{ dataForm.Title }}" class="poster">
         {% else %}
             <p>Sin Cartel</p>
         {% endif %}
         </div>
-
+<!--Aquí van los detalles que quiero que se muestren-->
         <div>
             <h2>{{ dataForm.Title }}</h2>
             <p><strong>Premios Ganados:</strong> {{ dataForm.Awards }}</p>
@@ -18,6 +18,7 @@
             <p><strong>Sinopsis:</strong> {{ dataForm.Plot }}</p>
             <p><strong>Duración:</strong> {{ dataForm.Runtime }}</p>
             <p><strong>Año de estreno:</strong> {{ dataForm.Year }}</p>
+            <p><strong>Actores:</strong> {{ dataForm.Actors }}</p>
         </div>
     
     <footer>

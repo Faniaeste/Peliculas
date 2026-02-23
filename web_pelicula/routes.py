@@ -1,25 +1,31 @@
 from web_pelicula import app
 from flask import render_template,request
-from config import SECRET_KEY
-import requests
+#Llamo a las dos funciones par poderlas utilizar en las rutas
+from .services.omdb_service import obtener_peliculas,obtener_detalles_pelicula
 
+#Pantalla principal
 @app.route("/")
 def index():
     return render_template("index.html", dataForm={}, button="Buscar película")
 
-@app.route("/buscar")
+@app.route("/buscar", methods=['GET'])
 def buscar():
     titulo = request.values.get('t')
     anno = request.values.get('y')
-    #Aquí guardo lo escrito por el cliente
-    datos = {'titulo':titulo, 'anno':anno}
-    url = f"http://www.omdbapi.com/?apikey={SECRET_KEY}&t={titulo}&y={anno}"
-
-    respuesta = requests.get(url)
-    pelicula = respuesta.json()
-
-    if pelicula.get('Response') == 'True':
-        return render_template("results.html", dataForm=pelicula, button="Buscar película")
+    
+    datos = obtener_peliculas(titulo,anno)
+    
+    if datos.get('Response') == 'True':
+        #Al pedir Search pido que traiga todos los detalles
+        return render_template("index.html", lista_peliculas=datos.get('Search'), dataForm={'titulo': titulo, 'anno':anno}, button="Buscar película")
     else:
         #Aquí en dataform dejo los datos ya escritos
-        return render_template("index.html", dataForm=datos, error="No encontramos la película", button="Buscar película")
+        return render_template("index.html", dataForm={'titulo': titulo, 'anno': anno}, error="No encontramos la película", button="Buscar película")
+
+# Aquí ponemos que busque el id de la pelicula para mostrar todos los que se llamen así,
+# y los detalles que tenga, con el botón.
+@app.route("/detalle/<id>")
+def detalle(id):
+    detalles = obtener_detalles_pelicula(id)
+    return render_template("results.html", dataForm=detalles)
+
