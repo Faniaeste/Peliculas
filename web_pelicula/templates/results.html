@@ -20,6 +20,17 @@
             <p><strong>Año de estreno:</strong> {{ dataForm.Year }}</p>
             <p><strong>Actores:</strong> {{ dataForm.Actors }}</p>
         </div>
+<!--Aquí van los comentarios de los clientes, que se guardan en guardar_comentario-->
+<!--Con dataForm buscamos el imdbID, para relacionarlo con el comentario-->
+        <section>
+            <h3>Deja tu cometario aquí:</h3>
+            <form action="/guardar_comentario {{ dataForm.imdbID }}" method="post">
+                <input type="text" name="nombre" placeholder="Tu nombre aquí" required>
+
+                <textarea name="comentario" placeholder="Dejános tu opinión" required></textarea>
+                <button type="submit">Publicar comentario</button>
+            </form>
+        </section>
     
     <footer>
         <a href="/" role="button">Volver al buscador</a>
