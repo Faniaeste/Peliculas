@@ -1,9 +1,10 @@
 from web_pelicula import app
 from flask import render_template,request,redirect,url_for
 #Llamo a las dos funciones par poderlas utilizar en las rutas
-from .services.omdb_service import obtener_peliculas,obtener_detalles_pelicula
+from web_pelicula.services.omdb_service import obtener_peliculas,obtener_detalles_pelicula
 #Esto crea la conexión entre la base de datos y la web
 import sqlite3
+from web_pelicula.models import select_comentarios
 
 #Pantalla principal
 @app.route("/")
@@ -28,8 +29,12 @@ def buscar():
 # y los detalles que tenga, con el botón.
 @app.route("/detalle/<id>")
 def detalle(id):
+    #Busca los detalles de la pelicula llamando a la función
     detalles = obtener_detalles_pelicula(id)
-    return render_template("results.html", dataForm=detalles)
+    #Busca los comentarios relacionados con ese id llamando a la función
+    comentarios = select_comentarios(id)
+    #Lo muestro en la pantalla
+    return render_template("results.html", dataForm=detalles, comentarios=comentarios)
 
 #Aquí guardamos los datos y comentarios de los clientes cogidos en results.html
 @app.route("/guardar_comentario/<imdb_id>", methods=['POST'])
