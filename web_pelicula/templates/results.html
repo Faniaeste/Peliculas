@@ -24,7 +24,7 @@
 <!--Con dataForm buscamos el imdbID, para relacionarlo con el comentario-->
         <section>
             <h3>Deja tu cometario aquí:</h3>
-            <form action="/guardar_comentario {{ dataForm.imdbID }}" method="post">
+            <form action="/guardar_comentario/ {{ dataForm.imdbID }}" method="POST">
                 <input type="text" name="nombre" placeholder="Tu nombre aquí" required>
 
                 <textarea name="comentario" placeholder="Dejános tu opinión" required></textarea>

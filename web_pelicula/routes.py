@@ -32,8 +32,8 @@ def detalle(id):
     return render_template("results.html", dataForm=detalles)
 
 #Aquí guardamos los datos y comentarios de los clientes cogidos en results.html
-@app.route("/guardar_comentario/<id>", methods=['POST'])
-def guardar_comentario(id):
+@app.route("/guardar_comentario/<imdb_id>", methods=['POST'])
+def guardar_comentario(imdb_id):
     nombre = request.form.get('nombre')
     comentario = request.form.get('comentario')
 
@@ -41,10 +41,12 @@ def guardar_comentario(id):
     #Aquí llamo a la funcion
     cursor = conexion.cursor()
     #Aquí le digo que guarde y donde
-    #Los??? son un metodo de seguridad
+    #Los??? son un metodo de seguridad 
+    #Las """ son para que no sea tan largo el codigo y hacer varias lineas
     cursor.execute('''
-        INSERT INTO comentarios (id, nombre, comentario,)
-        VALUES (?, ?, ?, )''', (id, nombre, comentario,))
+        INSERT INTO comentarios (imdb_id, nombre, comentario)
+        VALUES (?, ?, ? )
+    ''', (imdb_id, nombre, comentario))
     
     #commit guarda en la tabla lo comentado    
     conexion.commit()
@@ -52,5 +54,6 @@ def guardar_comentario(id):
     conexion.close()
 
     #url_for busca la dirección results  y le dice que busque ese id
-    return redirect(url_for('guardar_comentario', id=id))
+    #Guarda lo escrito y redirige la pagina a detalle
+    return redirect(url_for('detalle', id=imdb_id))
 

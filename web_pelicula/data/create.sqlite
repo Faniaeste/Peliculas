@@ -1,6 +1,8 @@
+
 CREATE TABLE "Comentarios" (
 	"id"	INTEGER,
 	"imdb_id"	TEXT,
 	"comentario"	TEXT,
+	"nombre"	TEXT,
 	PRIMARY KEY("id" AUTOINCREMENT)
-);
+)
