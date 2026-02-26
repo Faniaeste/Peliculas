@@ -24,7 +24,7 @@
 <!--Con dataForm buscamos el imdbID, para relacionarlo con el comentario-->
         <section>
             <h3>Deja tu cometario aquí:</h3>
-            <form action="/guardar_comentario/ {{ dataForm.imdbID }}" method="POST">
+            <form action="/guardar_comentario/{{ dataForm.imdbID }}" method="POST">
                 <input type="text" name="nombre" placeholder="Tu nombre aquí" required>
 
                 <textarea name="comentario" placeholder="Dejános tu opinión" required></textarea>
@@ -34,6 +34,17 @@
     
     <footer>
         <a href="/" role="button">Volver al buscador</a>
+        <hr>
+        <h3>Opiniones de los cinéfilos:</h3>
+        <ul>
+            {% for c in comentarios %}
+                <li>
+                    <strong>{{ c[0] }}:</strong> {{ c[1] }}
+                </li>
+            {% else %}
+                <li>Todavía no hay comentarios. ¡Escribe el primero!</li>
+            {% endfor %}
+        </ul>
     </footer>
 </article>
 {% endblock %}
